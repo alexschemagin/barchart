@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="author" content="Alex Schemagin"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"/>
+	<meta name="HandheldFriendly" content="True"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<title>CSS Vertical Bar Graphs</title>
+	<style type="text/css">
+		body {
+			background: #FFF;
+			margin: 0 5%;
+			padding: 1em;
+		}
+		h1 {
+			font: bold 2em/0.85 Arial, sans-serif;
+			text-align: center;
+			letter-spacing: 1px;
+			margin: 1em -0.5em;
+			padding: 0 0.5em;
+			border-bottom: 2px solid gray;
+		}
+		#q-graph {
+			display: block;
+			position: relative;
+			max-width: 960px; /* make sure this is the same as for ticks */
+			height: 300px;
+			margin: 1.1em auto 0;
+			padding: 0;
+			background: #FFF;
+			border: 1px solid #F0F0F0;
+			font: 9px Helvetica, Geneva, sans-serif;
+		}
+			#q-graph caption {
+				caption-side: top;
+				width: 80px;
+				position: relative;
+				font-weight: bold;
+				top: -20px;
+			}
+			#q-graph tr, #q-graph th, #q-graph td { 
+				position: absolute;
+				bottom: 0;
+				width: 25%;
+				z-index: 2;
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}			  
+			#q-graph thead tr {
+				left: 100%;
+				top: 50%;
+				bottom: auto;
+				margin: -2.5em 0 0 5em;
+			}
+			#q-graph thead th {
+				width: 7.5em;
+				height: auto;
+				padding: 0.5em 1em;
+			}
+			#q-graph thead th.sent {
+				top: 0;
+				left: 0;
+				border: 1px solid #F0F0F0;
+			}
+			#q-graph thead th.paid {
+				top: 2.75em;
+				left: 0;
+				border: 1px solid #F0F0F0;
+			}
+			#q-graph tbody tr {
+				height: 296px;
+				border-right: 1px solid #F0F0F0;
+				color: #F0F0F0;
+				font-size: 3em;
+				line-height:0;
+			}		
+				#q-graph #q1 {left: 0;}
+				#q-graph #q2 {left: 25%;}
+				#q-graph #q3 {left: 50%;}
+				#q-graph #q4 {left: 75%; border-right: none;}
+			#q-graph tbody th {
+				top: 0.75em;
+				left: 0.2em;
+				vertical-align: top;
+			}
+		#q-graph .bar {
+			width: 27%;
+			border-bottom: none;
+			color: #FFF;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+		#q-graph .bar p {
+			margin: 5px 0 0;
+			padding: 0;
+			text-shadow: 1px 1px 9px rgba(0,0,0,0.5);
+			line-height: 1em;
+			font-size: 0.5em;
+		}
+			#q-graph .sent {
+				left: 7%;
+				background: #383838;
+			}
+			#q-graph .paid {
+				left: 34%;
+				background: #9D9;
+			}
+		#ticks {
+			max-width: 960px; /* make sure the same value as graph table */
+			position: relative;
+			top: -300px;
+			width: 100%;
+			height: 300px;
+			z-index: 1;
+			margin-bottom: -300px;
+			font: 9px Helvetica, Geneva, sans-serif;
+			margin: 0 auto;
+		}
+			#ticks .tick {
+				position: relative;
+				border-bottom: 1px solid #F0F0F0;
+				width: 100%;
+			}
+			#ticks .tick p {
+				position: absolute;
+				right: 2%;
+				padding: 1% 0 0 0;
+				color: #CCC;
+				margin: 0 0 0 0.5em;
+		}
+		
+		@media screen and (max-width: 48.25em) {
+			#q-graph .bar p {
+				-webkit-transform:rotate(270deg);
+				margin-top: 60px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<table id="q-graph">
+		<caption>Quarterly Results</caption>
+		<tbody>
+			<tr class="qtr" id="q1">
+				<th scope="row">Q1</th>
+				<td class="sent bar" style="height: 111px;"><p>$18,450.00</p></td>
+				<td class="paid bar" style="height: 99px;"><p>$16,500.00</p></td>
+			</tr>
+			<tr class="qtr" id="q2">
+				<th scope="row">Q2</th>
+				<td class="sent bar" style="height: 206px;"><p>$34,340.72</p></td>
+				<td class="paid bar" style="height: 194px;"><p>$32,340.72</p></td>
+			</tr>
+			<tr class="qtr" id="q3">
+				<th scope="row">Q3</th>
+				<td class="sent bar" style="height: 259px;"><p>$43,145.52</p></td>
+				<td class="paid bar" style="height: 193px;"><p>$32,225.52</p></td>
+			</tr>
+			<tr class="qtr" id="q4">
+				<th scope="row">Q4</th>
+				<td class="sent bar" style="height: 110px;"><p>$18,415.96</p></td>
+				<td class="paid bar" style="height: 195px;"><p>$32,425.00</p></td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="ticks">
+		<div class="tick" style="height: 59px;"><p>$50,000</p></div>
+		<div class="tick" style="height: 59px;"><p>$40,000</p></div>
+		<div class="tick" style="height: 59px;"><p>$30,000</p></div>
+		<div class="tick" style="height: 59px;"><p>$20,000</p></div>
+		<div class="tick" style="height: 59px;"><p>$10,000</p></div>
+	</div>
+</body>
+</html>
